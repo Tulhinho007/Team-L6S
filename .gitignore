@@ -1,0 +1,9 @@
+node_modules/
+*.log
+dist/
+.env
+.env.local
+.DS_Store
+*.backup*
+*.backup
+vite.config.js.timestamp-*
