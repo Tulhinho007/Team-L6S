@@ -78,7 +78,7 @@ const Financeiro = ({alunos, setAlunos}) => {
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
       <h1 style={{ color: "#fff", fontSize: 26, fontWeight: 700 }}>Financeiro</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <StatCard icon={DollarSign} label="Total Pago" value={`R$ ${totalPago.toLocaleString("pt-BR")}`} sub="Este mês" color="#22c55e" />
         <StatCard icon={DollarSign} label="Pendente" value={`R$ ${totalPendente.toLocaleString("pt-BR")}`} sub="A receber" color="#eab308" />
       </div>
@@ -153,15 +153,15 @@ const Dashboard = ({alunos}) => {
   const receita = cob.filter(c => c.pago).reduce((s, c) => s + c.valor, 0);
 
   return (
-    <div className="flex flex-col gap-6">
-      <h1 className="text-white text-[26px] font-bold">Dashboard</h1>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <h1 style={{ color: "#fff", fontSize: 26, fontWeight: 700 }}>Dashboard</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <StatCard icon={Users} label="Alunos Ativos" value={ativos} sub={`${inativos} inativos`} color="#22c55e" />
         <StatCard icon={DollarSign} label="Receita Mês" value={`R$ ${receita.toLocaleString("pt-BR")}`} sub={`${pendentes} pendentes`} color="#F06523" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <Card>
           <h3 style={{ color: "#fff", fontSize: 16, fontWeight: 600, marginBottom: 16 }}>Alunos por Local</h3>
           {["Arena Clécio", "Prainha ZN", "Prainha ZS"].map(local => {
@@ -239,7 +239,7 @@ const Cadastro = ({alunos, setAlunos}) => {
 
       <Card>
         <h2 style={{ color: "#fff", fontSize: 18, fontWeight: 600, marginBottom: 20 }}>Novo Aluno</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
           {[ ["nome", "Nome Completo", "text"], ["email", "E-mail", "email"], ["telefone", "Telefone", "text"], ["mensalidade", "Mensalidade (R$)", "number"] ].map(([k, label, type]) => (
             <div key={k}>
               <label style={{ color: "#777", fontSize: 11, letterSpacing: 1, display: "block", marginBottom: 5 }}>{label}</label>
@@ -388,7 +388,7 @@ const Treinos = ({ alunos, setAlunos }) => {
       </div>
 
       {/* Estatísticas */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
         <Card>
           <div style={{ color: "#666", fontSize: 12, textTransform: "uppercase", letterSpacing: 1 }}>Total de Alunos</div>
           <div style={{ color: "#fff", fontSize: 28, fontWeight: 700, marginTop: 4 }}>{alunosAtivos.length}</div>
@@ -510,7 +510,7 @@ const Treinos = ({ alunos, setAlunos }) => {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 8 }}>
             {getDiasSemana().map((dia, i) => {
               const presentes = getTotalPresentes(dia);
               return (
@@ -658,51 +658,44 @@ export default function App() {
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", fontFamily: "'Barlow', sans-serif", background: "#1A1A1A" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&display=swap');*{box-sizing:border-box;margin:0;padding:0;}::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#1a1a1a;}::-webkit-scrollbar-thumb{background:#2e2e2e;border-radius:3px;}input:focus,select:focus{border-color:#F06523!important;box-shadow:0 0 0 3px rgba(240,101,35,0.1);}button:active{filter:brightness(0.9);}`}</style>
       
-      <header className="bg-[#1f1f1f] border-b border-[#2a2a2a] px-4 sm:px-6 lg:px-7 h-16 flex items-center justify-between sticky top-0 z-50">
+      <header style={{ background: "#1f1f1f", borderBottom: "1px solid #2a2a2a", padding: "0 16px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 50 }}>
         <Logo />
-        <nav className="hidden sm:flex gap-1">
+        <nav style={{ display: "flex", gap: 3 }}>
           {nav.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setPagina(id)}
-              className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
-                pagina === id 
-                  ? "bg-[rgba(240,101,35,0.1)] text-[#F06523] border border-[rgba(240,101,35,0.2)]" 
-                  : "bg-transparent text-[#666] border border-transparent hover:text-[#999]"
-              }`}
+              style={{
+                background: pagina === id ? "rgba(240,101,35,0.1)" : "transparent",
+                color: pagina === id ? "#F06523" : "#666",
+                border: pagina === id ? "1px solid rgba(240,101,35,0.2)" : "1px solid transparent",
+                borderRadius: 7,
+                padding: "6px 13px",
+                fontSize: 12,
+                fontWeight: 600,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                transition: "all 0.15s"
+              }}
             >
               <Icon size={13} />{label}
             </button>
           ))}
         </nav>
-        {/* Menu mobile */}
-        <nav className="flex sm:hidden gap-1 overflow-x-auto">
-          {nav.map(({ id, icon: Icon }) => (
-            <button
-              key={id}
-              onClick={() => setPagina(id)}
-              className={`p-2 rounded-md transition-all ${
-                pagina === id 
-                  ? "bg-[rgba(240,101,35,0.1)] text-[#F06523]" 
-                  : "bg-transparent text-[#666]"
-              }`}
-            >
-              <Icon size={18} />
-            </button>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <div className="relative">
-            <Bell size={16} color="#444" className="cursor-pointer" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#F06523] rounded-full" />
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ position: "relative" }}>
+            <Bell size={16} color="#444" style={{ cursor: "pointer" }} />
+            <span style={{ position: "absolute", top: -3, right: -3, width: 7, height: 7, background: "#F06523", borderRadius: "50%" }} />
           </div>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#F06523] to-[#c94e1a] flex items-center justify-center font-bold text-sm text-white cursor-pointer">
+          <div style={{ width: 32, height: 32, borderRadius: "50%", background: "linear-gradient(135deg,#F06523,#c94e1a)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 13, color: "#fff", cursor: "pointer" }}>
             C
           </div>
         </div>
       </header>
 
-      <main className="px-2 sm:px-4 py-4 sm:py-6 w-full flex-1">
+      <main style={{ padding: "16px", flex: 1, width: "100%" }}>
         {pages[pagina]}
       </main>
     </div>
