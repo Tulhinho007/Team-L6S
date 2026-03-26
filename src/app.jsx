@@ -96,7 +96,7 @@ const Financeiro = ({alunos, setAlunos}) => {
 
         <div style={{ display: "grid", gap: 10 }}>
           {cobrancasMes.map(c => (
-            <div key={c.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", background: "#1e1e1e", borderRadius: 10, border: "1px solid #2a2a2a" }}>
+            <div key={c.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", background: "#1e1e1e", borderRadius: 10 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 13, color: "#888" }}>
                   {c.alunoNome.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase()}
@@ -275,7 +275,7 @@ const Cadastro = ({alunos, setAlunos}) => {
 
         <div style={{ display: "grid", gap: 10 }}>
           {filtrados.map(aluno => (
-            <div key={aluno.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", background: "#1e1e1e", borderRadius: 10, border: "1px solid #2a2a2a" }}>
+            <div key={aluno.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", background: "#1e1e1e", borderRadius: 10 }}>
               <div>
                 <div style={{ color: "#fff", fontWeight: 600, fontSize: 14 }}>{aluno.nome}</div>
                 <div style={{ color: "#666", fontSize: 12 }}>{aluno.email} • {aluno.local}</div>
@@ -435,7 +435,7 @@ const Treinos = ({ alunos, setAlunos }) => {
                     justifyContent: "space-between",
                     padding: "12px 16px",
                     background: presente ? "rgba(34,197,94,0.1)" : "#1e1e1e",
-                    border: `1px solid ${presente ? "rgba(34,197,94,0.3)" : "#2a2a2a"}`,
+                    border: "none",
                     borderRadius: 8,
                     cursor: "pointer",
                     transition: "all 0.2s"
@@ -526,13 +526,13 @@ const Treinos = ({ alunos, setAlunos }) => {
                     padding: 12,
                     minHeight: 120,
                     cursor: "pointer",
-                    border: dia.toDateString() === diaSelecionado.toDateString() ? "1px solid #F06523" : "1px solid transparent"
+                    border: dia.toDateString() === diaSelecionado.toDateString() ? "none" : "none"
                   }}
                 >
                   <div style={{ color: "#888", fontSize: 11, textTransform: "capitalize", marginBottom: 4, textAlign: "center" }}>
                     {dia.toLocaleDateString('pt-BR', { weekday: 'short' })}
                   </div>
-                  <div style={{ color: "#fff", fontSize: 18, fontWeight: 600, textAlign: "center", marginBottom: 8 }}>
+                  <div style={{ color: "#fff", fontSize: 18, fontWeight: 700, textAlign: "center", marginBottom: 8 }}>
                     {dia.getDate()}
                   </div>
                   <div style={{ textAlign: "center" }}>
@@ -589,7 +589,7 @@ const Campeonatos = () => {
 
         <div style={{ display: "grid", gap: 12 }}>
           {campeonatos.map(campeonato => (
-            <div key={campeonato.id} style={{ background: "#1a1a1a", border: "1px solid #333", borderRadius: 8, padding: 16 }}>
+            <div key={campeonato.id} style={{ background: "#1a1a1a", borderRadius: 8, padding: 16 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
                   <h3 style={{ color: "#fff", fontSize: 16, fontWeight: 600, margin: 0 }}>{campeonato.nome}</h3>
