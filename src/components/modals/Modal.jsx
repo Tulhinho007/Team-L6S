@@ -2,28 +2,12 @@ import React from 'react';
 
 export const Modal = ({children, onClose, width = 520}) => (
   <div 
-    style={{
-      position: "fixed",
-      inset: 0,
-      background: "rgba(0,0,0,0.8)",
-      zIndex: 1000,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 16
-    }} 
+    className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
     onClick={onClose}
   >
     <div 
-      style={{
-        background: "#242424",
-        border: "1px solid #333",
-        borderRadius: 14,
-        width: "100%",
-        maxWidth: width,
-        maxHeight: "90vh",
-        overflowY: "auto"
-      }} 
+      className="bg-dark-card border border-dark-border rounded-2xl w-full max-h-[90vh] overflow-y-auto"
+      style={{maxWidth: width}}
       onClick={e => e.stopPropagation()}
     >
       {children}

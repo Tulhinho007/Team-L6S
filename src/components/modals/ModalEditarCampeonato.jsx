@@ -2,17 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { MHead } from './MHead';
 
-const iSt = (err) => ({
-  width: "100%",
-  background: "#1e1e1e",
-  border: `1px solid ${err ? "#ef4444" : "#333"}`,
-  borderRadius: 8,
-  padding: "9px 12px",
-  color: "#fff",
-  fontSize: 13,
-  outline: "none",
-  boxSizing: "border-box"
-});
+const inputClass = (err) => `w-full bg-dark-input border ${err ? 'border-red-500' : 'border-dark-border'} rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary transition-colors`;
 
 export const ModalEditarCampeonato = ({ campeonato, onSave, onClose }) => {
   const [form, setForm] = useState({
@@ -48,42 +38,42 @@ export const ModalEditarCampeonato = ({ campeonato, onSave, onClose }) => {
   return (
     <Modal onClose={onClose} width={500}>
       <MHead title="Editar Campeonato" subtitle={campeonato.nome} onClose={onClose}/>
-      <div style={{padding: 24}}>
-        <div style={{display: "flex", flexDirection: "column", gap: 14}}>
+      <div className="p-6">
+        <div className="flex flex-col gap-4 mb-6">
           <div>
-            <label style={{color: "#777", fontSize: 11, letterSpacing: 1, display: "block", marginBottom: 5}}>
+            <label className="text-dark-text text-xs uppercase tracking-wide block mb-2">
               Nome do Campeonato
             </label>
             <input 
               type="text" 
               value={form.nome} 
               onChange={e => set("nome", e.target.value)} 
-              style={iSt(erros.nome)}
+              className={inputClass(erros.nome)}
             />
-            {erros.nome && <p style={{color: "#ef4444", fontSize: 11, marginTop: 3}}>{erros.nome}</p>}
+            {erros.nome && <p className="text-red-400 text-xs mt-1">{erros.nome}</p>}
           </div>
 
           <div>
-            <label style={{color: "#777", fontSize: 11, letterSpacing: 1, display: "block", marginBottom: 5}}>
+            <label className="text-dark-text text-xs uppercase tracking-wide block mb-2">
               Data
             </label>
             <input 
               type="text" 
               value={form.data} 
               onChange={e => set("data", e.target.value)} 
-              style={iSt(erros.data)}
+              className={inputClass(erros.data)}
             />
-            {erros.data && <p style={{color: "#ef4444", fontSize: 11, marginTop: 3}}>{erros.data}</p>}
+            {erros.data && <p className="text-red-400 text-xs mt-1">{erros.data}</p>}
           </div>
 
           <div>
-            <label style={{color: "#777", fontSize: 11, letterSpacing: 1, display: "block", marginBottom: 5}}>
+            <label className="text-dark-text text-xs uppercase tracking-wide block mb-2">
               Local
             </label>
             <select 
               value={form.local} 
               onChange={e => set("local", e.target.value)} 
-              style={{...iSt(), appearance: "none"}}
+              className={inputClass()}
             >
               <option value="Arena Clécio">Arena Clécio</option>
               <option value="Prainha ZN">Prainha ZN</option>
@@ -92,13 +82,13 @@ export const ModalEditarCampeonato = ({ campeonato, onSave, onClose }) => {
           </div>
 
           <div>
-            <label style={{color: "#777", fontSize: 11, letterSpacing: 1, display: "block", marginBottom: 5}}>
+            <label className="text-dark-text text-xs uppercase tracking-wide block mb-2">
               Status
             </label>
             <select 
               value={form.status} 
               onChange={e => set("status", e.target.value)} 
-              style={{...iSt(), appearance: "none"}}
+              className={inputClass()}
             >
               <option value="inscricoes">Inscrições Abertas</option>
               <option value="encerrado">Encerrado</option>
@@ -106,33 +96,16 @@ export const ModalEditarCampeonato = ({ campeonato, onSave, onClose }) => {
           </div>
         </div>
 
-        <div style={{display: "flex", gap: 10, marginTop: 24, justifyContent: "flex-end"}}>
+        <div className="flex flex-col sm:flex-row gap-3 justify-end">
           <button 
             onClick={onClose}
-            style={{
-              background: "transparent",
-              border: "1px solid #333",
-              color: "#888",
-              borderRadius: 8,
-              padding: "9px 18px",
-              fontSize: 13,
-              cursor: "pointer"
-            }}
+            className="w-full sm:w-auto bg-transparent border border-dark-border text-dark-text rounded-lg px-4 py-2 text-sm font-medium hover:border-primary hover:text-white transition-colors"
           >
             Cancelar
           </button>
           <button 
             onClick={salvar}
-            style={{
-              background: "#F06523",
-              border: "none",
-              color: "#fff",
-              borderRadius: 8,
-              padding: "9px 22px",
-              fontWeight: 700,
-              fontSize: 13,
-              cursor: "pointer"
-            }}
+            className="w-full sm:w-auto bg-primary text-white rounded-lg px-6 py-2 text-sm font-bold hover:opacity-90 transition-opacity"
           >
             Salvar Alterações
           </button>

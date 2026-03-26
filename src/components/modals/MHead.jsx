@@ -2,29 +2,16 @@ import React from 'react';
 import { X } from 'lucide-react';
 
 export const MHead = ({title, subtitle, onClose}) => (
-  <div style={{
-    padding: "20px 24px 16px",
-    borderBottom: "1px solid #2e2e2e",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start"
-  }}>
-    <div>
-      <h2 style={{color: "#fff", fontWeight: 700, fontSize: 16}}>{title}</h2>
-      {subtitle && <p style={{color: "#666", fontSize: 12, marginTop: 3}}>{subtitle}</p>}
+  <div className="px-6 py-5 border-b border-dark-border flex justify-between items-start gap-4">
+    <div className="flex-1 min-w-0">
+      <h2 className="text-white font-bold text-base sm:text-lg">{title}</h2>
+      {subtitle && <p className="text-dark-text text-xs sm:text-sm mt-1 truncate">{subtitle}</p>}
     </div>
     <button 
       onClick={onClose} 
-      style={{
-        background: "transparent",
-        border: "none",
-        color: "#555",
-        cursor: "pointer",
-        padding: 4,
-        display: "flex"
-      }}
+      className="text-dark-text hover:text-white transition-colors p-1 flex-shrink-0"
     >
-      <X size={17}/>
+      <X size={18}/>
     </button>
   </div>
 );

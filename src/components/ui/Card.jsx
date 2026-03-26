@@ -1,13 +1,7 @@
 import React from 'react';
 
-export const Card = ({children, style = {}}) => (
-  <div style={{
-    background: "#242424",
-    border: "1px solid #2e2e2e",
-    borderRadius: 12,
-    padding: 24,
-    ...style
-  }}>
+export const Card = ({children, className = ""}) => (
+  <div className={`bg-dark-card border border-dark-border rounded-xl p-6 ${className}`}>
     {children}
   </div>
 );

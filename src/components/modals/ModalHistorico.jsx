@@ -10,59 +10,51 @@ export const ModalHistorico = ({aluno, cobrancas, onClose}) => {
   return (
     <Modal onClose={onClose} width={460}>
       <MHead title="Histórico de Pagamentos" subtitle={aluno.nome} onClose={onClose}/>
-      <div style={{padding: 24}}>
-        <div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 20}}>
-          <div style={{background: "#1e1e1e", borderRadius: 8, padding: 12}}>
-            <div style={{color: "#555", fontSize: 11, marginBottom: 3}}>Total Pago (período)</div>
-            <div style={{color: "#22c55e", fontWeight: 700, fontSize: 20}}>
+      <div className="p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+          <div className="bg-dark-input rounded-lg p-3">
+            <div className="text-dark-text text-xs uppercase tracking-wide mb-2">Total Pago</div>
+            <div className="text-green-400 font-bold text-xl">
               R$ {totalPago.toLocaleString("pt-BR")}
             </div>
           </div>
-          <div style={{background: "#1e1e1e", borderRadius: 8, padding: 12}}>
-            <div style={{color: "#555", fontSize: 11, marginBottom: 3}}>Mensalidade Atual</div>
-            <div style={{color: "#F06523", fontWeight: 700, fontSize: 20}}>
+          <div className="bg-dark-input rounded-lg p-3">
+            <div className="text-dark-text text-xs uppercase tracking-wide mb-2">Mensalidade</div>
+            <div className="text-primary font-bold text-xl">
               R$ {aluno.mensalidade}
             </div>
           </div>
         </div>
         
-        {hist.map((c, i) => (
-          <div 
-            key={c.id} 
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "12px 0",
-              borderBottom: i < hist.length - 1 ? "1px solid #2a2a2a" : "none"
-            }}
-          >
-            <div style={{display: "flex", alignItems: "center", gap: 12}}>
-              <div style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                background: c.pago ? "#22c55e" : c.status === "vencido" ? "#ef4444" : "#eab308",
-                flexShrink: 0
-              }}/>
-              <div>
-                <div style={{color: "#fff", fontWeight: 600, fontSize: 13}}>{c.mesLabel}</div>
-                <div style={{color: "#555", fontSize: 11, marginTop: 2}}>
-                  {c.dataPagamento
-                    ? `Pago em ${new Date(c.dataPagamento).toLocaleDateString("pt-BR")}`
-                    : `Vence dia ${aluno.diaVencimento}`
-                  }
+        <div className="space-y-3">
+          {hist.map((c, i) => (
+            <div 
+              key={c.id} 
+              className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 p-3 border-b border-dark-border last:border-b-0"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                  c.pago ? 'bg-green-400' : c.status === 'vencido' ? 'bg-red-400' : 'bg-yellow-400'
+                }`}/>
+                <div className="min-w-0">
+                  <div className="text-white font-semibold text-sm">{c.mesLabel}</div>
+                  <div className="text-dark-text text-xs mt-1">
+                    {c.dataPagamento
+                      ? `Pago em ${new Date(c.dataPagamento).toLocaleDateString("pt-BR")}`
+                      : `Vence dia ${aluno.diaVencimento}`
+                    }
+                  </div>
                 </div>
               </div>
+              <div className="flex items-center justify-between sm:justify-end gap-3">
+                <span className={`font-bold text-sm ${c.pago ? 'text-green-400' : 'text-dark-text'}`}>
+                  R$ {c.valor}
+                </span>
+                <Badge status={c.status}/>
+              </div>
             </div>
-            <div style={{display: "flex", alignItems: "center", gap: 10}}>
-              <span style={{color: c.pago ? "#22c55e" : "#888", fontWeight: 700, fontSize: 14}}>
-                R$ {c.valor}
-              </span>
-              <Badge status={c.status}/>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </Modal>
   );
