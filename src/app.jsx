@@ -702,7 +702,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="p-4 sm:p-6 lg:p-8 w-full flex-1">
+      <main className="px-2 sm:px-4 py-4 sm:py-6 w-full flex-1">
         {pages[pagina]}
       </main>
     </div>
